@@ -4,6 +4,7 @@
   height: 210px;
   margin-right: 20px;
   background-size: 100% 100%;
+  /*background-color: gray;*/
 }
 
 .covered {
@@ -19,4 +20,3 @@
   overflow: auto;
 }
 
-}

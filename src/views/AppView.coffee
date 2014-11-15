@@ -1,17 +1,25 @@
 class window.AppView extends Backbone.View
   template: _.template '
-    <button class="hit-button">Hit</button> <button class="stand-button">Stand</button>
+    <div class="status-bar">It\'s your turn!</div>
+    <button class="hit-button active">Hit</button>
+    <button class="stand-button active">Stand</button>
+    <button class="reset-button">New Game</button>
     <div class="player-hand-container"></div>
     <div class="dealer-hand-container"></div>
   '
 
   events:
-    'click .hit-button': -> @model.get('playerHand').hit()
-    'click .stand-button': -> @model.get('playerHand').stand()
+    'click .hit-button.active': -> @model.get('playerHand').hit()
+    'click .stand-button.active': -> @model.get('playerHand').stand()
+    'click .reset-button': ->
+      @model.resetGameState()
+      @$el.find('button').toggleClass('active')
 
   initialize: ->
     @render()
     @listenTo @model, 'change:isGameEnded', @signalEndOfGame
+    @listenTo @model, 'change:gameStatus', @updateGameStatus
+
 
   render: ->
     @$el.children().detach()
@@ -22,5 +30,7 @@ class window.AppView extends Backbone.View
   signalEndOfGame: ->
     if @model.get 'isGameEnded'
       # alert @model.get 'gameEndCondition'
-      console.log @model.get 'gameEndCondition'
-      console.log '*******************END OF GAME**********************'
+      @$el.find('button').toggleClass('active')
+
+  updateGameStatus: ->
+    @$el.find('.status-bar').text(@model.get('gameStatus'))
