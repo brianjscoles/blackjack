@@ -3,11 +3,14 @@ class window.Hand extends Backbone.Collection
 
   initialize: (array, @deck, @isDealer) ->
 
-
   hit: ->
     @add(@deck.pop())
     if @minScore() > 21
       @trigger('isOver21')
+
+  stand: ->
+    @trigger('stand')
+
 
   hasAce: -> @reduce (memo, card) ->
     memo or card.get('value') is 1
