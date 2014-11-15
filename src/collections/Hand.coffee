@@ -33,8 +33,6 @@ class window.Hand extends Backbone.Collection
 
   reset: ->
     Backbone.Collection.prototype.reset.call @
-    if @isDealer then console.log "this is the dealer's hand." else console.log "this is the player's hand."
-    console.log "resetting hand. length is now " + @length
     @hit()
     @hit()
     if @isDealer then @at(0).flip()
