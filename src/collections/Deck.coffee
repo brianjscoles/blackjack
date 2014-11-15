@@ -6,7 +6,7 @@ class window.Deck extends Backbone.Collection
 
   dealPlayer: -> new Hand [@pop(), @pop()], @, false
 
-  dealDealer: -> new Hand [@pop().flip(), @pop()], @, true
+  dealDealer: -> new DealerHand [@pop().flip(), @pop()], @, true
 
   reset: ->
     Backbone.Collection.prototype.reset.call @
