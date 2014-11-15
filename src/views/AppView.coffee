@@ -21,5 +21,6 @@ class window.AppView extends Backbone.View
 
   signalEndOfGame: ->
     if @model.get 'isGameEnded'
+      # alert @model.get 'gameEndCondition'
       console.log @model.get 'gameEndCondition'
       console.log '*******************END OF GAME**********************'
