@@ -6,4 +6,8 @@ class window.DealerHand extends window.Hand
     while @finalScore() < 20
       console.log "dealer says HIT"
       @hit()
-    if @finalScore() <= 21 then @stand()
+    if @finalScore() <= 21 then @stand() else @trigger('isOver21')
+
+
+  hit: ->
+    @add(@deck.pop())
