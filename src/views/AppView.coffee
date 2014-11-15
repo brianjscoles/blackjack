@@ -11,6 +11,7 @@ class window.AppView extends Backbone.View
 
   initialize: ->
     @render()
+    @listenTo @model, 'change:isGameEnded', @signalEndOfGame
 
   render: ->
     @$el.children().detach()
@@ -18,3 +19,5 @@ class window.AppView extends Backbone.View
     @$('.player-hand-container').html new HandView(collection: @model.get 'playerHand').el
     @$('.dealer-hand-container').html new HandView(collection: @model.get 'dealerHand').el
 
+  signalEndOfGame: ->
+    console.log "Game Over, Man. Game Over."
