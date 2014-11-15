@@ -3,12 +3,11 @@ class window.Hand extends Backbone.Collection
 
   initialize: (array, @deck, @isDealer) ->
 
+
   hit: ->
     @add(@deck.pop())
     if @minScore() > 21
       @trigger('isOver21')
-
-
 
   hasAce: -> @reduce (memo, card) ->
     memo or card.get('value') is 1
@@ -24,4 +23,8 @@ class window.Hand extends Backbone.Collection
     # when there is an ace, it offers you two scores - the original score, and score + 10.
     [@minScore(), @minScore() + 10 * @hasAce()]
 
-
+  reset: ->
+    Backbone.Collection.prototype.reset.call @
+    @hit()
+    @hit()
+    if @isDealer then @at(0).flip()
