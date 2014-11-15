@@ -8,9 +8,24 @@ class window.CardView extends Backbone.View
 
   initialize: -> @render()
 
+  revealCard: ->
+    @$el.find('.image').animate({"width": "0"},250,@revealCardPart2.bind(@))
+
+  revealCardPart2: ->
+    @$el.find('.image').animate({"width": "100%"},250)
+
+
+
+  events:
+    'click': ->
+      console.log 'You clicked me!'
+      console.log @
+      console.log @$el
+      @revealCard()
+
   render: ->
     @$el.children().detach()
-    # @$el.html
-    @$el.css("background-image", 'url(' + @getAddress() + ')');
+    @$el.html('<div class="image"></div>')
+    @$el.find('.image').css("background-image", 'url(' + @getAddress() + ')');
     @$el.addClass 'covered' unless @model.get 'revealed'
 
