@@ -20,4 +20,6 @@ class window.AppView extends Backbone.View
     @$('.dealer-hand-container').html new HandView(collection: @model.get 'dealerHand').el
 
   signalEndOfGame: ->
-    if @model.get 'isGameEnded' then alert @model.get 'gameEndCondition'
+    if @model.get 'isGameEnded'
+      console.log @model.get 'gameEndCondition'
+      console.log '*******************END OF GAME**********************'
