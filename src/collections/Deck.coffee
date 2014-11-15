@@ -4,9 +4,18 @@ class window.Deck extends Backbone.Collection
   initialize: ->
     @makeDeck()
 
-  dealPlayer: -> new Hand [@pop(), @pop()], @, false
+  dealPlayer: ->
+    playerHand = new Hand null, @, false
+    playerHand.hit()
+    playerHand.hit()
+    playerHand
 
-  dealDealer: -> new DealerHand [@pop().flip(), @pop()], @, true
+  dealDealer: ->
+    dealerHand = new DealerHand null, @, true
+    dealerHand.hit()
+    dealerHand.at(0).flip()
+    dealerHand.hit()
+    dealerHand
 
   reset: ->
     Backbone.Collection.prototype.reset.call @

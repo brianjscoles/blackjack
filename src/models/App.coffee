@@ -12,6 +12,7 @@ class window.App extends Backbone.Model
     @listenTo @get('dealerHand'), 'isOver21', @gameEndedDealerOver21
     @listenTo @get('dealerHand'), 'stand', @gameEndedCheckFinalScores
 
+
   gameEndedPlayerOver21: ->
     @set 'gameStatus', 'You went over 21 - busted!'
     @set 'isGameEnded', true

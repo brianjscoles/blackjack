@@ -4,11 +4,14 @@ class window.HandView extends Backbone.View
   template: _.template '<h2><% if(isDealer){ %>Dealer<% }else{ %>You<% } %> (<span class="score"></span>)</h2>'
 
   initialize: ->
-    @collection.on 'add remove change', =>
+    @collection.on 'remove reset', =>
       @render()
+    @collection.on 'add', =>
+      @renderAddedCard()
     @render()
 
   render: ->
+    console.log "rerendering Handview"
     @$el.children().detach()
     @$el.html @template @collection
     @$el.append @collection.map (card) ->
@@ -19,3 +22,13 @@ class window.HandView extends Backbone.View
 
     @$('.score').text score
 
+  renderAddedCard: ->
+    newCard = @collection.at(@collection.length-1)
+    newCardView = new CardView(model: newCard)
+    @$el.append newCardView.$el
+    newCardView.revealCard()
+    score = @collection.scores()[0]
+
+    if @collection.hasAce() and not @collection.hasCoveredAce() then score = @collection.scores().join ' or '
+
+    @$('.score').text score
