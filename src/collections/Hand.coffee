@@ -20,6 +20,11 @@ class window.Hand extends Backbone.Collection
     score + if card.get 'revealed' then card.get 'value' else 0
   , 0
 
+  finalScore: ->
+    #scores is a tuple representing [score, score with aces]
+    scores = @scores()
+    if scores[1] <= 21 then return scores[1] else return scores[0]
+
   scores: ->
     # The scores are an array of potential scores.
     # Usually, that array contains one element. That is the only score.
@@ -28,6 +33,13 @@ class window.Hand extends Backbone.Collection
 
   reset: ->
     Backbone.Collection.prototype.reset.call @
+    if @isDealer then console.log "this is the dealer's hand." else console.log "this is the player's hand."
+    console.log "resetting hand. length is now " + @length
     @hit()
     @hit()
     if @isDealer then @at(0).flip()
+
+  print: ->
+    @forEach (elem) ->
+      console.log elem.get('rankName') + " of " + elem.get('suitName')
+

@@ -1,7 +1,9 @@
 class window.DealerHand extends window.Hand
 
   takeDealerTurn: ->
+    console.log "taking dealers turn now"
     @at(0).flip()
-    while @minScore() < 17
+    while @finalScore() < 20
+      console.log "dealer says HIT"
       @hit()
-    if @minScore() <= 21 then @stand()
+    if @finalScore() <= 21 then @stand()
