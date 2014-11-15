@@ -16,6 +16,9 @@ class window.Hand extends Backbone.Collection
     memo or card.get('value') is 1
   , 0
 
+  hasCoveredAce: ->
+    @at(0).get('rankName') is 'ace' and not @at(0).get('revealed')
+
   minScore: -> @reduce (score, card) ->
     score + if card.get 'revealed' then card.get 'value' else 0
   , 0

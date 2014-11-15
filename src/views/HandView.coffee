@@ -15,7 +15,7 @@ class window.HandView extends Backbone.View
       new CardView(model: card).$el
     score = @collection.scores()[0]
 
-    if @collection.hasAce() then score = @collection.scores().join ' or '
+    if @collection.hasAce() and not @collection.hasCoveredAce() then score = @collection.scores().join ' or '
 
     @$('.score').text score
 
