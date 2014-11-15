@@ -12,7 +12,10 @@ class window.App extends Backbone.Model
   gameEndedOver21: ->
     @set 'isGameEnded', true
     @set 'gameEndCondition', 'over21'
-
+    @get('deck').reset()
+    @get('playerHand').reset()
+    @get('dealerHand').reset()
+    @set 'isGameEnded', false
 
 
 
