@@ -6,8 +6,10 @@ class window.HandView extends Backbone.View
   initialize: ->
     @collection.on 'remove reset', =>
       @render()
-    @collection.on 'add', =>
+    @collection.on 'hit', =>
       @renderAddedCard()
+    @collection.on 'change', =>
+      @renderScore()
     @render()
 
   render: ->
@@ -16,19 +18,17 @@ class window.HandView extends Backbone.View
     @$el.html @template @collection
     @$el.append @collection.map (card) ->
       new CardView(model: card).$el
-    score = @collection.scores()[0]
-
-    if @collection.hasAce() and not @collection.hasCoveredAce() then score = @collection.scores().join ' or '
-
-    @$('.score').text score
+    @renderScore()
 
   renderAddedCard: ->
     newCard = @collection.at(@collection.length-1)
     newCardView = new CardView(model: newCard)
     @$el.append newCardView.$el
-    newCardView.revealCard()
+    newCard.flip()
+    console.log 'This code is running!'
+    @renderScore()
+
+  renderScore: ->
     score = @collection.scores()[0]
-
     if @collection.hasAce() and not @collection.hasCoveredAce() then score = @collection.scores().join ' or '
-
     @$('.score').text score

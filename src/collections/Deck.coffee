@@ -6,15 +6,14 @@ class window.Deck extends Backbone.Collection
 
   dealPlayer: ->
     playerHand = new Hand null, @, false
-    playerHand.hit()
-    playerHand.hit()
+    playerHand.deal()
+    playerHand.deal()
     playerHand
 
   dealDealer: ->
     dealerHand = new DealerHand null, @, true
-    dealerHand.hit()
-    dealerHand.at(0).flip()
-    dealerHand.hit()
+    dealerHand.deal()
+    dealerHand.deal()
     dealerHand
 
   reset: ->
