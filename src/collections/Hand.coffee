@@ -5,8 +5,12 @@ class window.Hand extends Backbone.Collection
 
   hit: ->
     @add(@deck.pop())
+    @trigger('hit')
     if @minScore() > 21
       @trigger('isOver21')
+
+  deal: ->
+    @add(@deck.pop())
 
   stand: ->
     @trigger('stand')
@@ -36,9 +40,9 @@ class window.Hand extends Backbone.Collection
 
   reset: ->
     Backbone.Collection.prototype.reset.call @
-    @hit()
-    @hit()
-    if @isDealer then @at(0).flip()
+    @deal()
+    @deal()
+    @trigger 'reset'
 
   print: ->
     @forEach (elem) ->

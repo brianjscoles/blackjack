@@ -19,9 +19,11 @@ class window.AppView extends Backbone.View
     @render()
     @listenTo @model, 'change:isGameEnded', @signalEndOfGame
     @listenTo @model, 'change:gameStatus', @updateGameStatus
+    @model.flipInitialCards()
 
 
   render: ->
+    @model.get('playerHand').someMethod
     @$el.children().detach()
     @$el.html @template()
     @$('.player-hand-container').html new HandView(collection: @model.get 'playerHand').el

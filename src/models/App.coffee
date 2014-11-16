@@ -12,6 +12,13 @@ class window.App extends Backbone.Model
     @listenTo @get('dealerHand'), 'isOver21', @gameEndedDealerOver21
     @listenTo @get('dealerHand'), 'stand', @gameEndedCheckFinalScores
 
+  flipInitialCards: ->
+    @get('playerHand').at(0).flip()
+    @get('playerHand').at(1).flip()
+    @get('dealerHand').at(1).flip()
+
+  startDealerTurn: ->
+    @get('dealerHand').takeDealerTurn()
 
   gameEndedPlayerOver21: ->
     @set 'gameStatus', 'You went over 21 - busted!'
@@ -23,9 +30,6 @@ class window.App extends Backbone.Model
 
 
 
-  startDealerTurn: ->
-    @get('dealerHand').takeDealerTurn()
-
   gameEndedCheckFinalScores: ->
     if @get('playerHand').finalScore() > @get('dealerHand').finalScore()
       @set 'gameStatus', 'You win!'
@@ -33,11 +37,11 @@ class window.App extends Backbone.Model
       @set 'gameStatus', 'The dealer wins!'
     @set 'isGameEnded', true
 
-
   resetGameState : ->
     @get('deck').reset()
     @get('playerHand').reset()
     @get('dealerHand').reset()
     @set 'isGameEnded', false
     @set 'gameStatus', 'It\'s your turn!'
+    @flipInitialCards()
 
