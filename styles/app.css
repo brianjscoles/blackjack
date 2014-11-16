@@ -29,3 +29,8 @@
   overflow: auto;
 }
 
+.container {
+  width: 60%;
+  margin: auto;
+  background-color: gray;
+}

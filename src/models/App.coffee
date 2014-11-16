@@ -18,7 +18,8 @@ class window.App extends Backbone.Model
     @get('dealerHand').at(1).flip()
 
   startDealerTurn: ->
-    @get('dealerHand').takeDealerTurn()
+    @set 'gameStatus', 'It\'s the dealer\'s turn!'
+    @get('dealerHand').takeDealerTurn(@get('playerHand').finalScore())
 
   gameEndedPlayerOver21: ->
     @set 'gameStatus', 'You went over 21 - busted!'

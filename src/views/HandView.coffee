@@ -13,7 +13,6 @@ class window.HandView extends Backbone.View
     @render()
 
   render: ->
-    console.log "rerendering Handview"
     @$el.children().detach()
     @$el.html @template @collection
     @$el.append @collection.map (card) ->
@@ -25,7 +24,6 @@ class window.HandView extends Backbone.View
     newCardView = new CardView(model: newCard)
     @$el.append newCardView.$el
     newCard.flip()
-    console.log 'This code is running!'
     @renderScore()
 
   renderScore: ->
