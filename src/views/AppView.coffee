@@ -31,7 +31,6 @@ class window.AppView extends Backbone.View
 
   signalEndOfGame: ->
     if @model.get 'isGameEnded'
-      # alert @model.get 'gameEndCondition'
       @$el.find('button').toggleClass('active')
 
   updateGameStatus: ->
