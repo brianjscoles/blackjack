@@ -1,2 +1,2 @@
 app = new App()
-new AppView(model: app).$el.appendTo 'body'
+new AppView(model: app).$el.appendTo '.game-table'

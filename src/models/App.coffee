@@ -22,11 +22,11 @@ class window.App extends Backbone.Model
     @get('dealerHand').takeDealerTurn(@get('playerHand').finalScore())
 
   gameEndedPlayerOver21: ->
-    @set 'gameStatus', 'You went over 21 - busted!'
+    @set 'gameStatus', 'You busted - the dealer wins!'
     @set 'isGameEnded', true
 
   gameEndedDealerOver21: ->
-    @set 'gameStatus', 'The dealer is bust!'
+    @set 'gameStatus', 'The dealer busted - you win!'
     @set 'isGameEnded', true
 
 
